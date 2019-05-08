@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg navbar-dark navigation "><!--NAVBAR-->
+  <a class="navbar-brand" href="#"><i class="far fa-address-book"></i> Contactados</a> 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav ">
+        <li class="nav-item active">
+          <a class="nav-link mr-5 add-button" href="#" data-toggle="modal" data-target="#Modal-add">
+              <i class="fas fa-user-plus fa-1x">Add</i>
+          </a>
+        </li>
+      </ul>
+  </div>
+</nav><!--NAVBAR-->
+
+<div class="row">
+  <div class="container mt-5">
+      <h4 class="text-center">Friends List</h4>
+      <div class="form-inline justify-content-end "><!-- search-bar -->
+        <input class="form-control mr-sm-2 rounded-0 mb-3 search-bar"  type="search" placeholder="Search" aria-label="Search">
+    </div>
+    <table class=" table table-bordered table-hover text-center contact-list"><!--MAIN TABLE-->
+      <thead>
+        <th>#id</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Options</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contactsArray">
+          <th scope="row">{{ contact.id }}</th>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.lastName }}</td>
+          <td>{{ contact.email }}</td>
+          <td>{{ contact.numb }}</td>
+          <td>
+            <button data-toggle="modal" data-target="#Modal-add" (click)="toEdit(contact)" class="btn btn-outline-info mx-1"><i class="far fa-edit fa-1x"></i></button>
+            <button (click)="delete(this.contact)" class="btn btn-outline-danger"><i class="far fa-trash-alt fa-1x"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div><!--MAIN TABLE-->
+
+<!--MODAL-->
+<div class="modal fade" id="Modal-add" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="ModalLabel">Add New Contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"><!--MODAL-->
+        <!-- Formulario -->
+        <form action="#">
+            <div class="form-group">
+                <input   class="form-control" [(ngModel)]="newContact.name" name="name" placeholder="Enter a Name" required>
+            </div>
+            <div class="form-group">
+                <input   class="form-control" [(ngModel)]="newContact.lastName" name="lastName" placeholder="Enter a Last Name" required>
+            </div>
+            <div class="form-group">
+                <input  class="form-control" [(ngModel)]="newContact.email" name="email" placeholder="Email@example.com" required>
+            </div>
+            <div class="form-group">
+                <input  class="form-control" [(ngModel)]="newContact.numb" name="numb" placeholder="Phone Number" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button (click)="addEdit()" type="submit" class="btn btn-primary" >Save</button>
+            </div>
+        </form>
+        <!-- Formulario -->
+      </div>
+    </div>
+  </div>
+</div><!--MODAL-->
+ 
